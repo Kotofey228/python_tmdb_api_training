@@ -4,6 +4,7 @@ import json
 
 api = '556bd0fed5f14fdc783703b508cc32b1'
 
+
 def load_json_data_from_url(base_url, url_params):
     url = '%s?%s' % (base_url, urllib.parse.urlencode(url_params))
     response = urllib.request.urlopen(url).read().decode('utf-8')
@@ -19,5 +20,3 @@ def make_tmdb_api_request(method, api_key, extra_params=None):
     }
     params.update(extra_params)
     return load_json_data_from_url(url, params)
-
-
