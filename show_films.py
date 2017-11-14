@@ -1,4 +1,5 @@
 import jsonio
 
-coll = jsonio.get_decoded_json('collection')
-print(coll.keys())
+if __name__ == '__main__':
+    coll = jsonio.get_decoded_json('collection')
+    print(coll.keys())
