@@ -1,30 +1,48 @@
-import tmdb
 import json
-
 import time
-
 from sys import stdout
 
-print('Введите год:')
-year = input()
-movie_collecton = {}
-page = 1
-while len(movie_collecton) < 1000:
-    current_coll = tmdb.make_tmdb_api_request(
-        method='/discover/movie',
-        api_key=tmdb.api,
-        extra_params={'primary_release_year': int(year), 'page': page})
-    for j in range(len(current_coll['results'])):
-        movie_collecton.update(
-            {current_coll['results'][j]['title']: current_coll['results'][j]})
-        stdout.write("\r%d" % len(movie_collecton) + '|1000')
-        stdout.flush()
-        time.sleep(0.01)
-        if len(movie_collecton) == 1000:
-            break
-    page += 1
-collection = open('collection.json', 'w')
-json.dump(movie_collecton, collection)
-collection.close()
+import tmdb
 
-print('Готово!')
+
+def get_movie_collection(coll_len, api, year):
+    movie_collecton = {}
+    page = 1
+    while len(movie_collecton) < coll_len:
+        current_coll = tmdb.make_tmdb_api_request(
+            method='/discover/movie',
+            api_key=api,
+            extra_params={'primary_release_year': int(year), 'page': page})['results']
+
+        for film_num in range(len(current_coll)):
+            movie_collecton.update(
+                {current_coll[film_num]['title']: current_coll[film_num]})
+            counter(len(movie_collecton), coll_len)
+            if len(movie_collecton) == coll_len:
+                break
+        page += 1
+        print()
+    return movie_collecton
+
+
+def counter(num, maxNum):
+    stdout.write("\r%d" % num + '|' + str(maxNum))
+    stdout.flush()
+    time.sleep(SLEEP_TIME)
+
+
+SLEEP_TIME = 0.01
+COLLECTION_LEN = 1000
+if __name__ == '__main__':
+    print('Введите год:')
+    year = input()
+    print('Введите ключ api')
+    api_key = input()
+
+    movies = get_movie_collection(COLLECTION_LEN, api_key, year)
+
+    collection_file = open('collection.json', 'w')
+    json.dump(movies, collection_file)
+    collection_file.close()
+
+    print('Готово!')
