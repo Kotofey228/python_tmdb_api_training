@@ -1,8 +1,8 @@
-import json
 import time
 from sys import stdout
 
 import tmdb
+import jsonio
 
 
 def get_movie_collection(coll_len, api, year):
@@ -41,8 +41,6 @@ if __name__ == '__main__':
 
     movies = get_movie_collection(COLLECTION_LEN, api_key, year)
 
-    collection_file = open('collection.json', 'w')
-    json.dump(movies, collection_file)
-    collection_file.close()
+    jsonio.encode_json('collection', movies)
 
     print('Готово!')

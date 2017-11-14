@@ -1,11 +1,9 @@
-import json
+import jsonio
 
 print('Введите ключевое слово:')
 keyword = input()
-
-encoded_coll = open('collection.json')
-collection = json.load(encoded_coll)
-encoded_coll.close()
+print()
+collection = jsonio.get_decoded_json('collection')
 
 title_list = []
 for title in collection.keys():

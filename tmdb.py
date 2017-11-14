@@ -2,8 +2,6 @@ import urllib.request
 import urllib.parse
 import json
 
-api = '556bd0fed5f14fdc783703b508cc32b1'
-
 
 def load_json_data_from_url(base_url, url_params):
     url = '%s?%s' % (base_url, urllib.parse.urlencode(url_params))

@@ -1,6 +1,4 @@
-import json
+import jsonio
 
-c = open('collection.json')
-coll = json.load(c)
-c.close()
+coll = jsonio.get_decoded_json('collection')
 print(coll.keys())

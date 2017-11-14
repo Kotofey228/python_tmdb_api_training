@@ -1,11 +1,9 @@
-import json
+import jsonio
 
 print('Введите название фильма:')
 title = input()
 
-encoded_coll = open('collection.json')
-collection = json.load(encoded_coll)
-encoded_coll.close()
+collection = jsonio.get_decoded_json('collection')
 if title in collection.keys():
     film = collection[title]
 else:
@@ -25,5 +23,6 @@ for film in collection:
         break
 
 print('Рекомендованные:')
+print()
 for film in recommendation_list:
-	print(film)
+    print(film)
