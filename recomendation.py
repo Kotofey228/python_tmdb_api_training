@@ -1,11 +1,11 @@
-import jsonio
+import json_serializer
 
 
 if __name__ == '__main__':
     print('Введите название фильма:')
     title = input()
 
-    collection = jsonio.get_decoded_json('collection')
+    collection = json_serializer.get_decoded_json('collection')
     if title in collection.keys():
         film = collection[title]
     else:

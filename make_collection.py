@@ -2,7 +2,7 @@ import time
 from sys import stdout
 
 import tmdb
-import jsonio
+import json_serializer
 
 
 def get_movie_collection(coll_len, api, year):
@@ -41,6 +41,6 @@ if __name__ == '__main__':
 
     movies = get_movie_collection(COLLECTION_LEN, api_key, year)
 
-    jsonio.encode_json('collection', movies)
+    json_serializer.encode_json('collection', movies)
 
     print('Готово!')

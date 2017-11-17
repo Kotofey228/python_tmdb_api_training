@@ -1,5 +1,5 @@
-import jsonio
+import json_serializer
 
 if __name__ == '__main__':
-    coll = jsonio.get_decoded_json('collection')
+    coll = json_serializer.get_decoded_json('collection')
     print(coll.keys())
