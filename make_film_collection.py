@@ -1,4 +1,3 @@
-import time
 from sys import stdout
 
 import tmdb
@@ -7,8 +6,7 @@ import json_serializer
 
 def get_movie_collection(collection_len, api, year):
     movie_collecton = {}
-    page = 1
-    while len(movie_collecton) < collection_len:
+    for page in range(1, 51):
         current_collection = tmdb.make_tmdb_api_request(
             method='/discover/movie',
             api_key=api,
@@ -20,20 +18,23 @@ def get_movie_collection(collection_len, api, year):
             counter(len(movie_collecton), collection_len)
             if len(movie_collecton) == collection_len:
                 break
-        page += 1
     return movie_collecton
 
 
 def counter(num, maxNum):
     stdout.write("\r%d" % num + '|' + str(maxNum))
     stdout.flush()
-    time.sleep(SLEEP_TIME)
 
 
-SLEEP_TIME = 0.01
 COLLECTION_LEN = 1000
 if __name__ == '__main__':
-    year = input('Введите год: ')
+    try:
+        year = input('Введите год (1935-2017): ')
+        if not(1934 <= int(year) <= 2017):
+            raise ValueError
+    except ValueError:
+        print('Вы ввели неправильное значение, попробуйте снова.')
+        exit()
     api_key = input('Введите ключ api: ')
 
     movies = get_movie_collection(COLLECTION_LEN, api_key, year)

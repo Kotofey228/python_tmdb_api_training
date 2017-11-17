@@ -2,9 +2,7 @@ import json_serializer
 
 
 if __name__ == '__main__':
-    print('Введите ключевое слово:')
-    keyword = input()
-    print()
+    keyword = input('Введите ключевое слово: ')
     collection = json_serializer.get_decoded_json('collection')
 
     title_list = []
@@ -12,5 +10,6 @@ if __name__ == '__main__':
         if keyword.lower() in title.lower().split():
             title_list.append(title)
 
+    print('\nРезультаты:\n')
     for title in title_list:
         print(title)

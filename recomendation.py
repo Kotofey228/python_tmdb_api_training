@@ -1,11 +1,9 @@
 import json_serializer
 
 
-if __name__ == '__main__':
-    print('Введите название фильма:')
-    title = input()
-
+def make_recomend_set(title):
     collection = json_serializer.get_decoded_json('collection')
+
     if title in collection.keys():
         film = collection[title]
     else:
@@ -24,7 +22,14 @@ if __name__ == '__main__':
         if len(recommendation_list) > 10:
             break
 
-    print('Рекомендованные:')
-    print()
-    for film in recommendation_list:
+    return recommendation_list
+
+
+if __name__ == '__main__':
+    title = input('Введите название фильма: ')
+
+    recommend_list = make_recomend_set(title)
+
+    print('\nРекомендованные:\n')
+    for film in recommend_list:
         print(film)
