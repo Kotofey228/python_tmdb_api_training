@@ -6,7 +6,7 @@ import json_serializer
 
 def get_movie_collection(collection_len, api, year):
     movie_collecton = {}
-    for page in range(1, 51):
+    for page in range(1, COLLECTION_LEN / 20 + 1):
         current_collection = tmdb.make_tmdb_api_request(
             method='/discover/movie',
             api_key=api,
